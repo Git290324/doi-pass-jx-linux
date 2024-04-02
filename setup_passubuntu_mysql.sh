@@ -10,8 +10,9 @@ echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '$NEW_PASSWORD'; FLUSH PRIVILE
 # Chạy mysql_secure_installation
 echo -e "\n\n\n\nY\n$NEW_PASSWORD\n$NEW_PASSWORD\nY\nY\nY\nY" | sudo mysql_secure_installation
 
-# Truy cập MySQL với mật khẩu mới
-echo "CREATE DATABASE server1;
+# Xóa cơ sở dữ liệu "server1" nếu tồn tại và tạo lại
+echo "DROP DATABASE IF EXISTS server1;
+CREATE DATABASE server1;
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '$NEW_PASSWORD';
 FLUSH PRIVILEGES;
 exit" | sudo mysql -u root -p"$NEW_PASSWORD"
